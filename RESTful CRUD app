@@ -1,0 +1,53 @@
+#RESTful CRUD App
+### 1. Planning and Setup
+* Create an ERD: Just do it.
+* Generate an express app with Handlebars `--hbs` `express blog_demo --hbs`
+* Install dependencies (pg) `npm i` and then `npm i --save pg`
+: pg is a package that allows us to talk to postgres
+* .gitignore (node_modules)
+`echo node_modules > .gitignore`
+* Create routes files: users.js, posts.js: Just do it and route properly
+* Create views files: users/users.js, users/user.js, users/new.js, users/edit.js, posts/posts.js, posts/post.js, posts/new.js, posts/edit.js
+	* Also just do it properly
+		* `Shift+A` makes new folder
+		* Highlight the directory you want to make a new file in and hit A to create a new file
+	* 5-7 restful routes
+		* `GET (‘/’)`
+		* `GET ('/:id')`
+		* `POST ('/')`
+		* `PUT ('/:id')`
+		* `DELETE ('/:id')`
+		* `GET ('/new')` & `GET ('/:id/edit')` <-- das is 		for server-side
+* Set up styles - add stylesheet to public folder and include any CSS links that you will use in the layout.hbs: Just do it.
+* Create an app.js file in the public folder for client side javascript: Just do it
+* `Git init`, `git add .`, `git commit` : Just do it.
+
+###2. Configure DB and Knex
+* `createdb`
+	* `psql`
+	* `CREATE DATABASE blog_db`
+* `knex init` -> knexfile.js
+* In the knexfile.js:
+	`module.exports = {
+		development:{
+			client: 'pg',
+			connection: 'postgres://localhost/blog_db'
+		},
+		production:{
+			client: 'pg',
+			connection: process.env.DATABASE_URL = '?ssl=true'
+		}
+	};`
+* db/knex.js
+	* This uses the knex settings from the knexfile.js to create an instance of knex to use in our project.
+	* environment - we want to choose one of the environments: `var environment = process.env.NODE_ENV || 'development';` 
+	* choose the configurations from our knexfile with the correct environment: `var config = require('../knexfile.js')[environment];`
+	* apply those configurations to knex by invoking knex with config: `var knex = require('knex')(config);`
+	* `module.exports = knex;` 
+* db/api.js
+	* `var knex = require('./knex');`
+	* `module.exports = {};`
+* Require the db/api.js in the users and posts routes
+* create migrations (users, posts)
+* create seeds (delete, users, posts)
+* git add and commit
