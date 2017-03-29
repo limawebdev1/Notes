@@ -1,0 +1,22 @@
+body{
+  margin-left:2%;
+  margin-right:2%;
+  padding-bottom:70px;
+  font-size:15px;
+}
+.code{
+  font-family:Courier;
+  padding:4px;
+  background-color:rgb(57, 56, 54);
+  color:rgb(245, 245, 245);
+}
+.filename{
+  color:rgb(154, 12, 51);
+  background-color:rgb(238, 238, 238);
+  font-family:Courier;
+  font-weight:bold;
+}
+li{
+  margin-top:10px;
+  margin-bottom:10px;
+}

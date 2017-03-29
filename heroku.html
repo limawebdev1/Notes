@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Heroku Deployment</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="row">
+      <div class="col-sm-12">
+        <h1>Heroku Deployment</h1><br>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-9">
+        <ol>
+          <li><span class="code">heroku apps:create username-kittensblog</span></li>
+          <li><span class="code">node -v</span> (get the node version)</li>
+          <li>In <span class="filename">package.json</span>, put in the node version like this:<br/>
+            <img src="imgs/nodev.png" alt="">
+          </li>
+          <li><span class="code">heroku addons:create heroku-postgresql</span></li>
+          <li>In <span class="filename">knexfile.js</span>, add the config for the production environment: <br/>
+            <img src="imgs/knexfile.png" alt="">
+          </li>
+          <li>In <span class="filename">package.json</span>, add these scripts:<br/>
+            <img src="imgs/scripts.png" alt="">
+            <ul>
+              <li>You can put all your knex migration and seed scripts in the heroku-postbuild.</li>
+              <li><span class="code">node app.js</span> runs the file wherever you've initialized your express server/defined your routes. Sometimes people name that file server.js whence you would change the script to <span class="code">node server.js</span> instead.</li>
+            </ul>
+          </li>
+          <li><span class="code">echo 'web: node app.js' > Procfile</span></li>
+          <li><span class="code">bash -c 'heroku config:set SESSION_SECRET=$(openssl rand -hex 64)'</span></li>
+          <li><span class="code">git add .</span></li>
+          <li><span class="code">git commit -m "yah heroku deployment do it"</span></li>
+          <li><span class="code">git push heroku master</span></li>
+          <li><span class="code">heroku pg:psql</span> (Check to see that your database is seeded)</li>
+          <li>Open your deployed url site in Google Chrome.</li>
+          <li><span class="code">heroku logs</span> (If something weird is happening)</li>
+        </ol>
+
+      </div>
+      <div class="col-sm-3">
+        <h3>Express File System</h3>
+        <img src="imgs/fs.png" alt="">
+      </div>
+    </div>
+  </body>
+</html>
